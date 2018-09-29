@@ -49,8 +49,8 @@ class HttpRequestClient
     {
         //参数验证
         $params = $this->verify($request);
-        $this->assemble($request, $params);
 
+        $this->assemble($request, $params);
         $client = new HttpClient($request->getServiceHost(), $request->getServicePort());
         $client->setMethod($request->getRequestMethod());
         $client->setUrl($request->getRequestUrl());
@@ -59,6 +59,7 @@ class HttpRequestClient
             'Connection' => 'Keep-Alive',
             'Keep-Alive' => '120'
         ]);
+
         if ($request->getRequestMethod() != RequestMethod::GET) {
             if ($request->getRequestType() == RequestType::RAW) {
                 $params = json_encode($params); //如果是raw data方式提交，则直接赋值json

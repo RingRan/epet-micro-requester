@@ -18,7 +18,7 @@ use Epet\MicroRequest\Soa\SoaManagerInterface;
  * @version 1.0
  * @package Epet\Base\Standard
  */
-abstract class BaseRequest
+class BaseRequest
 {
     use RequestTrait;
 
@@ -60,7 +60,7 @@ abstract class BaseRequest
     /**
      * @var string 请求方法
      */
-    protected $requestMethod  = '';
+    protected $requestMethod = RequestMethod::GET;
 
     /**
      * @var array 请求参数
@@ -264,6 +264,15 @@ abstract class BaseRequest
     public function getServicePath(): string
     {
         return $this->servicePath;
+    }
+
+    /**
+     * set service verwsion
+     *
+     * @param $serviceVersion
+     */
+    public function setServiceVersion($serviceVersion) {
+        $this->serviceVersion = $serviceVersion;
     }
 
     /**

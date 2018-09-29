@@ -126,36 +126,4 @@ class BaseResponse
     {
         $this->errors = $errors;
     }
-
-    /**
-     * @return string
-     */
-    public function getResponseDto()
-    {
-        return $this->responseDto;
-    }
-
-    /**
-     * @param string $responseDto
-     */
-    public function setResponseDto($responseDto)
-    {
-        $this->responseDto = $responseDto;
-    }
-
-    /**
-     * @return string
-     */
-    public function getResponseDtoList()
-    {
-        return $this->responseDtoList;
-    }
-
-    /**
-     * @param string $responseDtoList
-     */
-    public function setResponseDtoList($responseDtoList)
-    {
-        $this->responseDtoList = $responseDtoList;
-    }
 }
