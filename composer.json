@@ -1,0 +1,27 @@
+{
+  "name": "epet/micro-requester",
+  "description": "Something Awesome By EpetTech@2018",
+  "keywords": [
+    "epet",
+    "micro-requester",
+    "curl"
+  ],
+  "homepage": "http://projectdoc.epetbar.com/index.php",
+  "authors": [
+    {
+      "name": "Ring Ran",
+      "email": "ranping@gutou.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "config" :{
+    "secure-http": false
+  },
+  "autoload": {
+    "psr-4": {
+      "Epet\\MicroRequest\\": "src/"
+    }
+  }
+}
