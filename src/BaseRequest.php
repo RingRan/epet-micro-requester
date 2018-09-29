@@ -3,6 +3,7 @@
 namespace Epet\MicroRequest;
 
 use Epet\MicroRequest\Exception\RequestException;
+use Epet\MicroRequest\Soa\Manager;
 use Epet\MicroRequest\Soa\ManagerInterface;
 use Epet\MicroRequest\Soa\ServiceInterface;
 use Epet\MicroRequest\Soa\SoaManagerInterface;
@@ -18,7 +19,7 @@ use Epet\MicroRequest\Soa\SoaManagerInterface;
  * @version 1.0
  * @package Epet\Base\Standard
  */
-abstract class BaseRequest
+class BaseRequest
 {
     use RequestTrait;
 
@@ -60,7 +61,7 @@ abstract class BaseRequest
     /**
      * @var string 请求方法
      */
-    protected $requestMethod  = '';
+    protected $requestMethod = RequestMethod::GET;
 
     /**
      * @var array 请求参数
@@ -81,6 +82,43 @@ abstract class BaseRequest
      * @var string 请求类型
      */
     protected $requestType    = RequestType::FORM;
+
+    protected $redis = null;
+
+    protected $consulHttpAddress = '';
+
+    /**
+     * @return string
+     */
+    public function getConsulHttpAddress(): string
+    {
+        return $this->consulHttpAddress;
+    }
+
+    /**
+     * @param string $consulHttpAddress
+     */
+    public function setConsulHttpAddress(string $consulHttpAddress)
+    {
+        $this->consulHttpAddress = $consulHttpAddress;
+    }
+
+    /**
+     * @return null
+     */
+    public function getRedis()
+    {
+        return $this->redis;
+    }
+
+    /**
+     * @param null $redis
+     */
+    public function setRedis($redis)
+    {
+        $this->redis = $redis;
+    }
+
 
     public function __construct()
     {
@@ -124,15 +162,15 @@ abstract class BaseRequest
      */
     protected function serviceDiscovery(): void
     {
-        if('' == $this->getServiceName()) {
-            throw new RequestException("服务名不能为空");
-        }
-
         if(empty($this->soaManager)) {
-            throw new RequestException("请设置Soa Manager");
+            if('' == $this->getServiceName()) {
+                throw new RequestException("服务名不能为空");
+            }
+
+            $this->soaManager = new Manager($this->redis, $this->getConsulHttpAddress());
         }
 
-        $server = $this->soaManager->discovery();
+        $server = $this->soaManager->discovery($this->getServiceName());
         if(!$server instanceof ServiceInterface) {
             throw new RequestException("服务不存在");
         }
@@ -163,6 +201,16 @@ abstract class BaseRequest
     public function getServiceName(): string
     {
         return $this->serviceName;
+    }
+
+    /**
+     * set服务名称
+     *
+     * @return string
+     */
+    public function setServiceName(string $serviceName)
+    {
+        return $this->serviceName = $serviceName;
     }
 
     /**
@@ -264,6 +312,15 @@ abstract class BaseRequest
     public function getServicePath(): string
     {
         return $this->servicePath;
+    }
+
+    /**
+     * set service verwsion
+     *
+     * @param $serviceVersion
+     */
+    public function setServiceVersion($serviceVersion) {
+        $this->serviceVersion = $serviceVersion;
     }
 
     /**

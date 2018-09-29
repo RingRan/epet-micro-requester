@@ -8,15 +8,26 @@ class TestRequest
     public static function main()
     {
         $username = "冉平";
-        $pwd      = "111111";
+        $pwd      = "1111111";
         $exp      = 86400;
 
-        $request = new TestRequester();
-        $request->setServiceHost('http://192.168.56.3');
-        $request->setServicePort('9502');
-        $request->setUsername($username);
-        $request->setPwd($pwd);
-        $request->setExp($exp);
+        //不继承
+        $request = new \Epet\MicroRequest\BaseRequest();
+        $request->setConsulHttpAddress('192.168.10.222:8500');
+        $request->setServiceName('php-server-common');
+        $request->setServiceVersion('v1');
+        $request->setServicePath('/auth/issue');
+        $request->setRequestParam('username', $username);
+        $request->setRequestParam('pwd', $pwd);
+        $request->setRequestParam('exp', $exp);
+        // 继承
+
+//        $request = new TestRequester();
+//        $request->setConsulHttpAddress('192.168.10.222:8500');
+//        $request->setServiceName('php-server-common');
+//        $request->setUsername($username);
+//        $request->setPwd($pwd);
+//        $request->setExp($exp);
 
         $response = $request->send()->getResponse();
         if ($response->getStatusCode() != 200) {
