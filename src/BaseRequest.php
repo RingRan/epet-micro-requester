@@ -88,6 +88,69 @@ class BaseRequest
     protected $consulHttpAddress = '';
 
     /**
+     * @var string refer service name
+     */
+    protected $referServiceName = '';
+
+    /**
+     * @return string
+     */
+    public function getReferServiceName(): string
+    {
+        return $this->referServiceName;
+    }
+
+    /**
+     * @param string $referServiceName
+     */
+    public function setReferServiceName(string $referServiceName)
+    {
+        $this->referServiceName = $referServiceName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReferRequestHost(): string
+    {
+        return $this->referRequestHost;
+    }
+
+    /**
+     * @param string $referRequestHost
+     */
+    public function setReferRequestHost(string $referRequestHost)
+    {
+        $this->referRequestHost = $referRequestHost;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGatewayTrace(): string
+    {
+        return $this->GatewayTrace;
+    }
+
+    /**
+     * @param string $GatewayTrace
+     */
+    public function setGatewayTrace(string $GatewayTrace)
+    {
+        $this->GatewayTrace = $GatewayTrace;
+    }
+
+    /**
+     * @var string request host
+     */
+    protected $referRequestHost = '';
+
+    /**
+     * @var string refer trace_id
+     */
+    protected $GatewayTrace = '';
+
+    /**
      * @return string
      */
     public function getConsulHttpAddress(): string

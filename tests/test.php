@@ -8,7 +8,7 @@ class TestRequest
     public static function main()
     {
         $username = "冉平";
-        $pwd      = "1111111";
+        $pwd      = "11111";
         $exp      = 86400;
 
         //不继承
@@ -20,6 +20,9 @@ class TestRequest
         $request->setRequestParam('username', $username);
         $request->setRequestParam('pwd', $pwd);
         $request->setRequestParam('exp', $exp);
+        $request->setGatewayTrace('');
+        $request->setReferServiceName('');
+        $request->setReferRequestHost('');
         // 继承
 
 //        $request = new TestRequester();

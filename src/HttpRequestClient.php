@@ -57,7 +57,10 @@ class HttpRequestClient
         $client->setTimeout($timeout);
         $client->setHeader([
             'Connection' => 'Keep-Alive',
-            'Keep-Alive' => '120'
+            'Keep-Alive' => '120',
+            'Refer-Service-Name: '.$request->getReferServiceName(),
+            'Refer-Request-Host: '.$request->getReferRequestHost(),
+            'Gateway-Trace: '.$request->getGatewayTrace(),
         ]);
 
         if ($request->getRequestMethod() != RequestMethod::GET) {
