@@ -10,7 +10,7 @@
   "authors": [
     {
       "name": "Ring Ran",
-      "email": "ranping@gutou.com"
+      "email": "463188135@qq.com"
     }
   ],
   "require": {
@@ -19,6 +19,8 @@
   "config" :{
     "secure-http": false
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Epet\\MicroRequest\\": "src/"
